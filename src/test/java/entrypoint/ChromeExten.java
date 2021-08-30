@@ -20,8 +20,7 @@ public class ChromeExten {
     @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.chrome.silentOutput", "true");
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "/usr/bin/google-chrome");
+        System.setProperty("webdriver.chrome.driver","/usr/bin/google-chrome");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
