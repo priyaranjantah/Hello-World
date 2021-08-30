@@ -31,7 +31,7 @@ public class ChromeExten {
         chromeOptions.addArguments("use-fake-ui-for-media-stream");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("headless");
-        chromeOptions.addExtensions(new File("/home/share/1.6.8_0.crx"));
+        chromeOptions.addExtensions(new File("\\\\src\\test\\resources\\ChromeExtension\\1.6.8_0.crx"));
         chromeOptions.addArguments("--no-sandbox");
         HashMap<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
