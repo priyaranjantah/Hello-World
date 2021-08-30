@@ -30,6 +30,7 @@ public class ChromeExten {
         chromeOptions.addArguments("use-fake-device-for-media-stream");
         chromeOptions.addArguments("use-fake-ui-for-media-stream");
         chromeOptions.addArguments("--disable-notifications");
+        chromeOptions.addArguments("headless");
         //chromeOptions.addExtensions(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\ChromeExtension\\1.6.8_0.crx"));
         chromeOptions.addArguments("--no-sandbox");
         HashMap<String, Object> prefs = new HashMap<String, Object>();
