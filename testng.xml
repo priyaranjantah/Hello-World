@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RTR_AutomationTestSuite" parallel="tests" thread-count="2">
+    <test name="RTR_AutomationTest_Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="entrypoint.ChromeExten">
+                <methods>
+                    <!-- Common Tests  -->
+                    <include name="testScript"></include>
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
