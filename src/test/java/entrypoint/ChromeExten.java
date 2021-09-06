@@ -34,8 +34,8 @@ public class ChromeExten {
 
     @BeforeClass
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        System.setProperty("webdriver.chrome.driver",
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        //System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") + "/src/test/resources/webdrivers/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
