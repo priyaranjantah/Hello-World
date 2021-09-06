@@ -44,6 +44,10 @@ public class ChromeExten {
         chromeOptions.addArguments("use-fake-ui-for-media-stream");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("start-maximized"); // open Browser in maximized mode
+        chromeOptions.addArguments("disable-infobars"); // disabling infobars
+        chromeOptions.addArguments("--disable-extensions"); // disabling extensions
+        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
         //chromeOptions.addArguments("headless");
         //chromeOptions.addExtensions(new File("\\\\src\\test\\resources\\ChromeExtension\\1.6.8_0.crx"));
         chromeOptions.addArguments("--no-sandbox");
