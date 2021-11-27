@@ -34,12 +34,14 @@ public class ChromeExten {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        //System.setProperty("webdriver.chrome.driver",
-                //System.getProperty("user.dir") + "/src/test/resources/webdrivers/chromedriver.exe";
+        //System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver",
+                System.getProperty("user.dir") + "/src/test/resources/webdrivers/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("use-fake-device-for-media-stream");
         chromeOptions.addArguments("use-fake-ui-for-media-stream");
         chromeOptions.addArguments("--disable-notifications");
@@ -47,10 +49,8 @@ public class ChromeExten {
         chromeOptions.addArguments("start-maximized"); // open Browser in maximized mode
         chromeOptions.addArguments("disable-infobars"); // disabling infobars
         chromeOptions.addArguments("--disable-extensions"); // disabling extensions
-        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
-        //chromeOptions.addArguments("headless");
-        //chromeOptions.addExtensions(new File("\\\\src\\test\\resources\\ChromeExtension\\1.6.8_0.crx"));
-        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu");
+        //chromeOptions.addExtensions(new File(System.getProperty("user.dir") + "\\src\\test\\resources\\ChromeExtension\\1.6.14_0.crx"));
         HashMap<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_settings.popups", 0);
         chromeOptions.setExperimentalOption("prefs", prefs);
@@ -98,14 +98,51 @@ public class ChromeExten {
         if (table.isDisplayed()) {
             List<WebElement> allhost = table.findElements(By.tagName("label"));
             int total_node = allhost.size();
-                for (int i = 0; i < total_node; i++) {
-                    String nodeName = allhost.get(i).getText();
-                    System.out.println(nodeName);
+            for (int i = 0; i < total_node; i++) {
+                String nodeName = allhost.get(i).getText();
+                System.out.println(nodeName);
             }
             //driver.findElement(By.xpath("//h3[contains(text(),'Results')]//..//label")).;
             //driver.findElement(By.xpath("//button[@class='btn btn-custom' and contains(text(),'Report')]")).click();
         }
     }
 
+    @Test
+    public void test_PE_Library() throws InterruptedException {
+        driver.get("https://pe-library.kickdrumtech.com/");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        Assert.assertEquals(title, "Kickdrum PE-Library");
+        driver.findElement(By.xpath("//div[@role='button']")).click();
+        driver.findElement(By.id("identifierId")).sendKeys("priyaranjan@kickdrumtech.com");
+        driver.findElement(By.id("identifierNext")).click();
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("$Ganesha123");
+        driver.findElement(By.id("passwordNext")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.id("totpPin")).sendKeys(TOTPGenerator.getTwoFactorCode());
+        driver.findElement(By.id("totpNext")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.id("input-with-search-icon-textfield")).sendKeys("technology");
+        driver.findElement(By.xpath("//div[@class='searchButtonContainer']")).click();
 
+    }
+
+    @Test
+    public void test_Highlight() throws InterruptedException {
+        driver.get("https://docs.google.com");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        Assert.assertEquals(title, "Highlight");
+        driver.findElement(By.id("//input[@id='identifierId']")).sendKeys("priyaranjan@kickdrumtech.com");
+        driver.findElement(By.id("//div[@id='identifierNext']")).click();
+        driver.findElement(By.id("//input[@name='password']")).sendKeys("$Ganesha123");
+        driver.findElement(By.id("/div[@id='passwordNext']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.id("totpPin")).sendKeys(TOTPGenerator.getTwoFactorCode());
+        driver.findElement(By.id("totpNext")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//div[@id='login-action']")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//div[contains(@class,'template')]//img[contains(@src,'templates/thumbnails/docs-blank')]")).click();
+    }
 }
